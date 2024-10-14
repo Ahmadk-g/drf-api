@@ -15,4 +15,8 @@
    "files.autoSave": "off",
    "workbench.colorTheme": "Visual Studio Dark",
    "terminal.integrated.gpuAcceleration": "canvas",
+   "python.analysis.extraPaths": [
+      "/workspace/.pip-modules/lib/python3.12/site-packages",
+      ""
+   ],
 }
