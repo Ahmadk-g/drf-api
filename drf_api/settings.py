@@ -39,7 +39,12 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%d %b %y',
 }
 
-if 'DEV' not in os.environ:
+if 'DEV' in os.environ:
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+else: 
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer',
     ]
