@@ -117,10 +117,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    origin for origin in [
-        os.environ.get("CLIENT_ORIGIN"),
-        os.environ.get("CLIENT_ORIGIN_DEV")
-    ] if origin
+    "https://moments-x-edda9165746c.herokuapp.com",
+    "https://3000-ahmadkg-moments-eh1gx3pbb0m.ws.codeinstitute-ide.net",
 ]
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
