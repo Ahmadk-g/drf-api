@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 import re
 import dj_database_url
-from corsheaders.defaults import default_headers
 
 
 if os.path.exists('env.py'):
@@ -121,25 +120,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://3000-ahmadkg-moments-eh1gx3pbb0m.ws.codeinstitute-ide.net",
 ]
 
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'content-type',  # Allow content-type header
-    'authorization',  # Allow authorization header if using JWT
-    # Add any other custom headers your application needs
-]
-
-
     
 CORS_ALLOW_CREDENTIALS = True
 
-# Specify allowed methods
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
 
 
 ROOT_URLCONF = 'drf_api.urls'
