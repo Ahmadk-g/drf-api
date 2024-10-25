@@ -74,24 +74,6 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = ['8000-ahmadkg-drfapi-7jqgl0mb9dh.ws.codeinstitute-ide.net', 'localhost', os.environ.get('ALLOWED_HOST'),]
 
 
-CORS_ALLOWED_ORIGINS = [
-    origin for origin in [
-        os.environ.get("CLIENT_ORIGIN"),
-        os.environ.get("CLIENT_ORIGIN_DEV")
-    ] if origin
-]
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'content-type',  # Allow content-type header
-    'authorization',  # Allow authorization header if using JWT
-    # Add any other custom headers your application needs
-]
-
-
-    
-CORS_ALLOW_CREDENTIALS = True
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -134,6 +116,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    origin for origin in [
+        os.environ.get("CLIENT_ORIGIN"),
+        os.environ.get("CLIENT_ORIGIN_DEV")
+    ] if origin
+]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'content-type',  # Allow content-type header
+    'authorization',  # Allow authorization header if using JWT
+    # Add any other custom headers your application needs
+]
+
+
+    
+CORS_ALLOW_CREDENTIALS = True
 
 
 ROOT_URLCONF = 'drf_api.urls'
