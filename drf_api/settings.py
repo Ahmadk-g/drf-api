@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import re
 import dj_database_url
+from corsheaders.defaults import default_headers
+
 
 if os.path.exists('env.py'):
     import env
@@ -64,7 +66,7 @@ REST_AUTH_SERIALIZERS = {
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
@@ -72,18 +74,20 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = ['8000-ahmadkg-drfapi-7jqgl0mb9dh.ws.codeinstitute-ide.net', 'localhost', os.environ.get('ALLOWED_HOST'),]
 
 
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
+CORS_ALLOWED_ORIGINS = [
+    origin for origin in [
+        os.environ.get("CLIENT_ORIGIN"),
+        os.environ.get("CLIENT_ORIGIN_DEV")
+    ] if origin
+]
 
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(
-        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
-    ).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'content-type',  # Allow content-type header
+    'authorization',  # Allow authorization header if using JWT
+    # Add any other custom headers your application needs
+]
+
+
     
 CORS_ALLOW_CREDENTIALS = True
 
