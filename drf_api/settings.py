@@ -133,6 +133,16 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     
 CORS_ALLOW_CREDENTIALS = True
 
+# Specify allowed methods
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
 
 ROOT_URLCONF = 'drf_api.urls'
 
