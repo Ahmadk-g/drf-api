@@ -13,6 +13,14 @@ class Profile(models.Model):
     image = models.ImageField(
         upload_to='images/', default='default_profile_mcrw02.jpg'
     )
+
+    # for resolving url generating error
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            # Return the full Cloudinary URL if no image is set
+            return 'https://res.cloudinary.com/ds8x1i3zm/image/upload/default_profile_mcrw02.jpg'
     
     class Meta:
         ordering = ['-created_at']
@@ -20,6 +28,8 @@ class Profile(models.Model):
     
     def __str__(self):
         return f"{self.owner}'s profile"
+
+    
     
 
 def create_profile(sender, instance, created, **kwargs):
