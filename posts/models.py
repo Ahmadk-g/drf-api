@@ -22,20 +22,12 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='default_post_b29qkk.jpg', blank=True
+        upload_to='images/', default='../default_post_b29qkk', blank=True
     )
     image_filter = models.CharField(
         max_length=32, choices=image_filter_choices, default='normal'
         
     )
-
-    # for resolving url generating error
-    def get_image_url(self):
-        if self.image and hasattr(self.image, 'url'):
-            return self.image.url
-        else:
-            # Return the full Cloudinary URL if no image is set
-            return 'https://res.cloudinary.com/ds8x1i3zm/image/upload/default_post_b29qkk.jpg'
 
     class Meta:
         ordering = ['-created_at']
